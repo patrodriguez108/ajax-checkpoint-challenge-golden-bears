@@ -23,5 +23,9 @@ end
 
 get '/horses/:id' do
   @horse = Horse.find(params[:id])
-  erb :"/horses/show"
+  if request.xhr?
+    erb :"/horses/_stable_horse", layout: false
+  else
+    erb :"/horses/show"
+  end
 end

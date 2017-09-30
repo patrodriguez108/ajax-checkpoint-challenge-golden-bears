@@ -1,11 +1,10 @@
 $(document).ready(function() {
-  $("form#add_horse").on("click", function() {
+  $("form#to_horse_form").on("submit", function() {
     event.preventDefault();
     $form = $(this);
-    var method = $form.attr("method");
     var url = $form.attr("action");
     var request = $.ajax({
-      method: method,
+      method: "get",
       url: url
     });
 
@@ -16,5 +15,23 @@ $(document).ready(function() {
     });
   });
 
+  // $("form#new-horse-form").on("click", "button#submit-new-horse", function() {
+  //   event.preventDefault();
+  //   console.log("plz work");
+  // });
 
+  $("ul.list").on("click", "a", function() {
+    event.preventDefault();
+    $link = $(this);
+    var url = $link.attr("href");
+    var request = $.ajax({
+      method: "get",
+      url: url
+    });
+
+    request.done(function(response) {
+      var li = $link.closest("li");
+      li.append(response)
+    })
+  })
 });
