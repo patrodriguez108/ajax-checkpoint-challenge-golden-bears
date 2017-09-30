@@ -14,10 +14,14 @@ end
 
 post '/horses' do
   @horse = Horse.new(params[:horse])
-  if @horse.save
-    redirect "/horses/#{@horse.id}"
+  if request.xhr?
+
   else
-    erb :"/horses/new"
+    if @horse.save
+      redirect "/horses/#{@horse.id}"
+    else
+      erb :"/horses/new"
+    end
   end
 end
 
